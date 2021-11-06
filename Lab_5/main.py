@@ -27,7 +27,29 @@ def film_in_category(category:Union[int,str])->pd.DataFrame:
     Returns:
     pd.DataFrame: DataFrame zawierający wyniki zapytania
     '''
-    return None
+    if isinstance(category,int):
+        sql_code = f"""select f.title, l.name as languge, c.name as category
+                    from film f
+                    join language l on l.language_id = f.language_id
+                    join film_category fc on fc.film_id = f.film_id
+                    join category c on c.category_id = fc.category_id
+                    where c.category_id = {category}
+                    order by f.title, languge"""
+        df = pd.read_sql(sql_code, con=connection)
+        return df
+
+    if isinstance(category,str):
+        sql_code = f"""select f.title, l.name as languge, c.name as category
+                    from film f
+                    join language l on l.language_id = f.language_id
+                    join film_category fc on fc.film_id = f.film_id
+                    join category c on c.category_id = fc.category_id
+                    where c.name like '{category}'
+                    order by f.title, languge"""
+        df = pd.read_sql(sql_code, con=connection)
+        return df
+    else: 
+        return None
     
 def film_in_category_case_insensitive(category:Union[int,str])->pd.DataFrame:
     ''' Funkcja zwracająca wynik zapytania do bazy o tytuł filmu, język, oraz kategorię dla zadanego:
@@ -47,7 +69,30 @@ def film_in_category_case_insensitive(category:Union[int,str])->pd.DataFrame:
     Returns:
     pd.DataFrame: DataFrame zawierający wyniki zapytania
     '''
-    return None
+    if isinstance(category,int):
+        sql_code = f"""select f.title, l.name as languge, c.name as category
+                    from film f
+                    join language l on l.language_id = f.language_id
+                    join film_category fc on fc.film_id = f.film_id
+                    join category c on c.category_id = fc.category_id
+                    where c.category_id = {category}
+                    order by f.title, languge"""
+        df = pd.read_sql(sql_code, con=connection)
+        return df
+
+    if isinstance(category,str):
+        sql_code = f"""select f.title, l.name as languge, c.name as category
+                    from film f
+                    join language l on l.language_id = f.language_id
+                    join film_category fc on fc.film_id = f.film_id
+                    join category c on c.category_id = fc.category_id
+                    where c.name ilike '{category}'
+                    order by f.title, languge"""
+        df = pd.read_sql(sql_code, con=connection)
+        return df
+    else: 
+        return None
+    
     
 def film_cast(title:str)->pd.DataFrame:
     ''' Funkcja zwracająca wynik zapytania do bazy o obsadę filmu o dokładnie zadanym tytule.
@@ -64,7 +109,17 @@ def film_cast(title:str)->pd.DataFrame:
     Returns:
     pd.DataFrame: DataFrame zawierający wyniki zapytania
     '''
-    return None
+    if isinstance(title,str):
+        sql_code = f"""select a.first_name, a.last_name
+                    from actor a
+                    join film_actor fa on fa.actor_id = a.actor_id
+                    join film f on f.film_id = fa.film_id
+                    where f.title like '{title}'
+                    order by a.last_name, a.first_name"""
+        df = pd.read_sql(sql_code, con=connection)
+        return df
+    else:
+        return None
     
 
 def film_title_case_insensitive(words:list) :
@@ -83,4 +138,19 @@ def film_title_case_insensitive(words:list) :
     Returns:
     pd.DataFrame: DataFrame zawierający wyniki zapytania
     '''
-    return None
+    
+    if isinstance(words,list):
+        words_ = '|'.join(map(str, words))
+        
+        sql_code = f"""select title
+                    from film
+                    where title ~* '(?:^| )({words_})""" + """{1,}(?:$| )'
+                    order by title"""
+        df = pd.read_sql(sql_code, con=connection)
+        return df
+    else:
+        return None
+    
+    
+    
+    
