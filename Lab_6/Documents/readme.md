@@ -1,16 +1,23 @@
-## Sekcja 1: *Zawartość dokumentacji replikacji*
+## Section 1: *The contents of the replication documentation*
 1. Folder Analysis_Data:
-    * plik oryginalny ze zmienioną nazwą *13_WARMIŃSKO-MAZURSKIE.csv*.
+    * original file with file name changed *13_WARMIŃSKO-MAZURSKIE.csv*.
+    * extracted parts of the data from the original file used for the further analysis saved into .csv files
+    * the graphic interpretation of the extracted data in form of bar diagrams and histograms used to compare the quantity and independencies between the variables
 2. Folder Command_Files: 
-    * plik wykonawczy *Command_file.ipynb*.  
+    * command file *Command_file.ipynb*.  
 3. Folder Douments: 
-    * plik *readme.md*.  
+    * file *readme.md*.  
+    * The_Data_Appendix.md
 4. Folder Original_Data: 
-    * plik oryginalny *13_WARMIN╠üSKO-MAZURSKIE.csv*;
-    * plik oryginalny ze zmienioną nazwą *13_WARMIŃSKO-MAZURSKIE.csv*.
+    * original file *13_WARMIN╠üSKO-MAZURSKIE.csv*;
+    * original file with file name changed *13_WARMIŃSKO-MAZURSKIE.csv*.
+    * Metadata folder: 
+      * The_Metadata_Guide.md
 
-## Sekcja 2: *Modyfikacje dokonane w plikach z danymi do importu*
-Kopia pliku oryginalnego *13_WARMIN╠üSKO-MAZURSKIE.csv* została zapisana jako plik *13_WARMIŃSKO-MAZURSKIE.csv* ze względu na występujące w nazwie znaki specjalne utrudniające czytelny przekaz odnośnie zawartości pliku.
+## Section 2: *Modifications made to importable data files*
+Copy of the original file *13_WARMIN╠üSKO-MAZURSKIE.csv* has been saved as *13_WARMIŃSKO-MAZURSKIE.csv* because of the special characters hindering the comprehensive meaning of the file origin and contents.
 
-## Sekcja 3: *Instrukcje dotyczące replikowania badania* 
+## Section 3: *Instructions for replicating the study* 
+The softaware necessary to run the command file used for data processing and analysis conducted for the study consists of Python3 with the additional imports from matplotlib, pandas and numpy. The hierarchy of the folders should be compatible with the imports and exports run from the command file, such as the location of the Analysis_Data folder and the Original_Data folder containing the original file *13_WARMIŃSKO-MAZURSKIE.csv* crucial to the data processing (source of all the data used for the study).
 
+The only command file provided contains all the processings of the data which ensured the results of the study. Firstly, the data is cleaned from empty records or records that do not contain the adequate data used for particular phase of the analysis and saved into separate files in the Analysis_Data folder for any further possibility of development. The fils are then the basis for the graphic interpretation of the variables and their codependencies.
